@@ -42,34 +42,39 @@ export default function LoginPage() {
 
   return (
     <div className="grid min-h-screen lg:grid-cols-[1.1fr_1fr]">
-      <aside className="relative hidden overflow-hidden bg-brand text-white lg:flex lg:flex-col lg:justify-between lg:p-12">
-        <div className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-white/5" />
-        <div className="absolute -bottom-32 -left-16 h-[28rem] w-[28rem] rounded-full bg-white/5" />
+      <aside className="relative hidden overflow-hidden bg-case text-case-ink shadow-[inset_-18px_0_40px_-28px_rgba(0,0,0,0.65)] lg:flex lg:flex-col lg:justify-between lg:p-12">
         <Logo light />
         <div className="relative max-w-md">
-          <h1 className="text-4xl font-semibold leading-tight tracking-tight">Stock counts you can trust. Profit you can see.</h1>
-          <p className="mt-4 text-white/75">
-            Inventory, point of sale and invoicing for independent shops, built to replace the spreadsheet.
+          <div className="case-scene mb-8 h-36 w-44" aria-hidden="true">
+            <div className="case-stack space-y-3">
+              <div className="case-tray" />
+              <div className="case-tray case-tray-copper" />
+              <div className="case-tray" />
+            </div>
+          </div>
+          <h1 className="text-4xl font-semibold leading-tight tracking-tight">The counter, in one case.</h1>
+          <p className="mt-4 text-case-ink/70">
+            Stock, the till and GST invoices for a Sydney accessories shop. Open the case and the numbers are already on the shelf.
           </p>
-          <ul className="mt-10 space-y-5">
+          <ul className="mt-10 space-y-3">
             {POINTS.map(({ icon: Icon, title, body }) => (
-              <li key={title} className="flex gap-4">
-                <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/10">
+              <li key={title} className="well-dark flex gap-4 rounded-2xl px-4 py-3">
+                <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand text-brand-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_3px_0_#0a3c36]">
                   <Icon size={18} />
                 </span>
                 <span>
                   <span className="block font-medium">{title}</span>
-                  <span className="block text-sm text-white/70">{body}</span>
+                  <span className="block text-sm text-case-ink/65">{body}</span>
                 </span>
               </li>
             ))}
           </ul>
         </div>
-        <p className="relative text-xs text-white/60">Made for Sydney retail · Prices in AUD incl. GST</p>
+        <p className="relative text-xs text-case-ink/50">Sydney retail · AUD incl. GST</p>
       </aside>
 
       <main className="flex items-center justify-center px-4 py-12 sm:px-8">
-        <div className="w-full max-w-sm">
+        <div className="slab w-full max-w-sm rounded-3xl p-6 sm:p-8">
           <div className="mb-8 lg:hidden">
             <Logo />
           </div>
@@ -89,7 +94,7 @@ export default function LoginPage() {
             </Button>
           </form>
 
-          <div className="mt-8 rounded-xl border border-dashed border-line bg-surface p-4">
+          <div className="well mt-8 rounded-2xl p-4">
             <div className="flex items-center gap-2 text-sm font-medium">
               <BadgeCheck size={16} className="text-brand" /> Demo accounts
             </div>

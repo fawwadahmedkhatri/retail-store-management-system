@@ -146,8 +146,8 @@ export default function PosPage() {
               key={c}
               onClick={() => setCategory(c)}
               className={cx(
-                "whitespace-nowrap rounded-full border px-3 py-1.5 text-sm",
-                category === c ? "border-brand bg-brand text-white" : "border-line bg-surface text-muted hover:text-ink",
+                "min-h-10 whitespace-nowrap rounded-xl px-3 text-sm",
+                category === c ? "keycap-brand" : "keycap text-muted",
               )}
             >
               {c}
@@ -159,7 +159,7 @@ export default function PosPage() {
             <button
               key={p.id}
               onClick={() => add(p.id)}
-              className="flex flex-col rounded-xl border border-line bg-surface p-3 text-left transition hover:border-brand hover:shadow-sm"
+              className="tile flex flex-col rounded-2xl p-3 text-left"
             >
               <span className="text-[11px] uppercase tracking-wide text-muted">{p.category}</span>
               <span className="mt-1 line-clamp-2 min-h-[2.5rem] text-sm font-medium leading-tight">{p.name}</span>
@@ -180,7 +180,7 @@ export default function PosPage() {
       </section>
 
       <section className="md:sticky md:top-20 md:self-start lg:top-8">
-        <div className="flex flex-col rounded-2xl border border-line bg-surface md:max-h-[calc(100vh-6rem)] lg:max-h-[calc(100vh-4rem)]">
+        <div className="slab flex flex-col rounded-3xl md:max-h-[calc(100vh-6rem)] lg:max-h-[calc(100vh-4rem)]">
           <div className="flex items-center gap-2 border-b border-line p-4">
             <Select value={customerId} onChange={(e) => setCustomerId(e.target.value)} aria-label="Customer">
               <option value="">Walk-in customer</option>
