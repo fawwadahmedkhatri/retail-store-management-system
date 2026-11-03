@@ -44,7 +44,7 @@ export function BarChart({ data, height = 220, valueLabel = "Sales", innerLabel 
           return (
             <g key={i} onMouseEnter={() => setHover(i)}>
               <rect x={pad.l + i * step} y={pad.t} width={step} height={ih} fill="transparent" />
-              <rect x={x} y={y(d.value)} width={bw} height={Math.max(0, y(0) - y(d.value))} rx={Math.min(4, bw / 3)} fill={active ? "#9fd3c4" : "#c3e3d9"} />
+              <rect x={x} y={y(d.value)} width={bw} height={Math.max(0, y(0) - y(d.value))} rx={Math.min(4, bw / 3)} fill={active ? "#efc3a6" : "#e6d2c2"} />
               {d.inner != null && d.inner > 0 && (
                 <rect x={x} y={y(d.inner)} width={bw} height={Math.max(0, y(0) - y(d.inner))} rx={Math.min(4, bw / 3)} fill="var(--brand)" opacity={active ? 1 : 0.9} />
               )}
@@ -64,7 +64,7 @@ export function BarChart({ data, height = 220, valueLabel = "Sales", innerLabel 
         >
           <div className="font-medium">{h.sub ?? h.label}</div>
           <div className="num mt-1 flex items-center gap-2">
-            <span className="h-2 w-2 rounded-sm bg-[#c3e3d9]" /> {valueLabel} {money(h.value)}
+            <span className="h-2 w-2 rounded-sm bg-[#e6d2c2]" /> {valueLabel} {money(h.value)}
           </div>
           {h.inner != null && (
             <div className="num flex items-center gap-2">
@@ -75,7 +75,7 @@ export function BarChart({ data, height = 220, valueLabel = "Sales", innerLabel 
       )}
       <div className="mt-2 flex gap-4 text-xs text-muted">
         <span className="flex items-center gap-1.5">
-          <span className="h-2.5 w-2.5 rounded-sm bg-[#c3e3d9]" /> {valueLabel} (inc GST)
+          <span className="h-2.5 w-2.5 rounded-sm bg-[#e6d2c2]" /> {valueLabel} (inc GST)
         </span>
         {data.some((d) => d.inner != null) && (
           <span className="flex items-center gap-1.5">

@@ -17,14 +17,14 @@ export function Button({
     <button
       {...props}
       className={cx(
-        "inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:cursor-not-allowed disabled:opacity-50",
+        "inline-flex items-center justify-center gap-2 rounded-xl font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:cursor-not-allowed disabled:opacity-50",
         size === "sm" && "h-8 px-3 text-sm",
         size === "md" && "h-10 px-4 text-sm",
         size === "lg" && "h-12 px-5 text-base",
-        variant === "primary" && "bg-brand text-brand-ink hover:bg-brand/90",
-        variant === "secondary" && "border border-line bg-surface text-ink hover:bg-surface-2",
+        variant === "primary" && "keycap-brand",
+        variant === "secondary" && "keycap text-ink",
         variant === "ghost" && "text-muted hover:bg-surface-2 hover:text-ink",
-        variant === "danger" && "bg-danger text-white hover:bg-danger/90",
+        variant === "danger" && "keycap-danger",
         className,
       )}
     />
@@ -45,7 +45,7 @@ export function Field({ label, hint, children, className }: { label: string; hin
 const width = (className?: string) => (className && /(^|\s)(\w+:)?w-/.test(className) ? "" : "w-full");
 
 const inputCls =
-  "h-10 rounded-lg border border-line bg-surface px-3 text-sm text-ink placeholder:text-muted/70 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20 disabled:bg-surface-2 disabled:text-muted";
+  "inset-field h-10 rounded-xl border border-line px-3 text-sm text-ink placeholder:text-muted/70 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/25 disabled:bg-surface-2 disabled:text-muted";
 
 export function Input({ className, ...props }: ComponentProps<"input">) {
   return <input {...props} className={cx(inputCls, width(className), className)} />;
@@ -60,14 +60,14 @@ export function Select({ className, children, ...props }: SelectHTMLAttributes<H
 }
 
 export function Card({ className, children }: { className?: string; children: ReactNode }) {
-  return <div className={cx("rounded-xl border border-line bg-surface", className)}>{children}</div>;
+  return <div className={cx("slab rounded-2xl", className)}>{children}</div>;
 }
 
 export function Badge({ tone = "neutral", children }: { tone?: "neutral" | "ok" | "warn" | "danger" | "brand"; children: ReactNode }) {
   return (
     <span
       className={cx(
-        "inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-medium",
+        "inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-medium shadow-[inset_0_1px_0_rgba(255,255,255,0.45)]",
         tone === "neutral" && "bg-surface-2 text-muted",
         tone === "ok" && "bg-ok-soft text-ok",
         tone === "warn" && "bg-warn-soft text-warn",
@@ -115,13 +115,13 @@ export function Modal({
   }, [open, onClose]);
   if (!open) return null;
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-ink/40 p-0 sm:items-center sm:p-4" onMouseDown={onClose}>
+    <div className="fixed inset-0 z-50 flex items-end justify-center bg-case/55 p-0 sm:items-center sm:p-4" onMouseDown={onClose}>
       <div
         role="dialog"
         aria-modal="true"
         aria-label={title}
         onMouseDown={(e) => e.stopPropagation()}
-        className={cx("flex max-h-[92vh] w-full flex-col rounded-t-2xl bg-surface shadow-xl sm:rounded-2xl", wide ? "sm:max-w-3xl" : "sm:max-w-lg")}
+        className={cx("slab flex max-h-[92vh] w-full flex-col rounded-t-3xl sm:rounded-3xl", wide ? "sm:max-w-3xl" : "sm:max-w-lg")}
       >
         <div className="no-print flex items-center justify-between border-b border-line px-5 py-4">
           <h2 className="text-lg font-semibold">{title}</h2>
@@ -138,7 +138,8 @@ export function Modal({
 
 export function Stat({ label, value, sub, tone }: { label: string; value: ReactNode; sub?: ReactNode; tone?: "ok" | "danger" }) {
   return (
-    <Card className="p-4">
+    <Card className="relative overflow-hidden p-4">
+      <span className="absolute inset-x-4 top-0 h-px bg-accent/70" aria-hidden />
       <div className="text-sm text-muted">{label}</div>
       <div className="num mt-1 text-2xl font-semibold tracking-tight">{value}</div>
       {sub && <div className={cx("mt-1 text-xs", tone === "ok" ? "text-ok" : tone === "danger" ? "text-danger" : "text-muted")}>{sub}</div>}
@@ -173,10 +174,10 @@ export function Pager({ page, total, size, onPage }: { page: number; total: numb
         {page * size + 1}–{Math.min(total, (page + 1) * size)} of {total.toLocaleString("en-AU")}
       </span>
       <div className="flex gap-2">
-        <button className="rounded-lg border border-line px-3 py-1.5 disabled:opacity-40" disabled={page === 0} onClick={() => onPage(page - 1)}>
+        <button className="keycap rounded-xl px-3 py-1.5 disabled:opacity-40" disabled={page === 0} onClick={() => onPage(page - 1)}>
           Previous
         </button>
-        <button className="rounded-lg border border-line px-3 py-1.5 disabled:opacity-40" disabled={page >= pages - 1} onClick={() => onPage(page + 1)}>
+        <button className="keycap rounded-xl px-3 py-1.5 disabled:opacity-40" disabled={page >= pages - 1} onClick={() => onPage(page + 1)}>
           Next
         </button>
       </div>
@@ -192,7 +193,7 @@ export function Toast({ message, onDone }: { message: string | null; onDone: () 
   }, [message, onDone]);
   if (!message) return null;
   return (
-    <div role="status" className="no-print fixed bottom-5 left-1/2 z-[60] -translate-x-1/2 rounded-lg bg-ink px-4 py-2.5 text-sm text-white shadow-lg">
+    <div role="status" className="no-print keycap-brand fixed bottom-5 left-1/2 z-[60] -translate-x-1/2 rounded-xl px-4 py-2.5 text-sm">
       {message}
     </div>
   );

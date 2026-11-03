@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useMemo } from "react";
 import { AlertTriangle, ArrowDownRight, ArrowUpRight, ShoppingCart } from "lucide-react";
 import { BarChart } from "@/components/BarChart";
-import { Badge, Button, Card, Stat } from "@/components/ui";
+import { Badge, Card, Stat } from "@/components/ui";
 import { buckets, lastNDays, netBetween, topProducts, totals } from "@/lib/analytics";
 import { TZ, dayKey, dayLabel, fmtTime, money, monthKey, msSinceSydneyMidnight } from "@/lib/format";
 import { useDb } from "@/lib/store";
@@ -50,21 +50,25 @@ export default function Dashboard() {
 
   return (
     <>
-      <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+      <div className="slab mb-6 flex flex-wrap items-end justify-between gap-4 rounded-2xl p-5">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">Counter</p>
+          <h1 className="mt-1 text-2xl font-semibold tracking-tight">
             {greet}, {user!.name.split(" ")[0]}
           </h1>
           <p className="mt-1 text-sm text-muted">
-            {now.toLocaleDateString("en-AU", { timeZone: TZ, weekday: "long", day: "numeric", month: "long", year: "numeric" })} · here&apos;s how the shop
-            is tracking.
+            {now.toLocaleDateString("en-AU", { timeZone: TZ, weekday: "long", day: "numeric", month: "long", year: "numeric" })} · {db.settings.name}
           </p>
         </div>
-        <Link href="/pos">
-          <Button variant="primary">
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="well rounded-xl px-4 py-2">
+            <div className="text-[11px] uppercase tracking-wide text-muted">Till</div>
+            <div className="text-sm font-medium">{lowStock.length} to reorder</div>
+          </div>
+          <Link href="/pos" className="keycap-brand inline-flex h-10 items-center gap-2 rounded-xl px-4 text-sm font-medium">
             <ShoppingCart size={16} /> New sale
-          </Button>
-        </Link>
+          </Link>
+        </div>
       </div>
 
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
